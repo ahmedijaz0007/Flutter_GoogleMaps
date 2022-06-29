@@ -1,16 +1,22 @@
-# flutter_map
+Test Project to integrate Google Maps API using Flutter.
 
-A new Flutter project.
+The code is mostly self explanatory but I will soon include step by step guide. You need to configure Google map apis from Google cloud platform.
 
-## Getting Started
+Features:
 
-This project is a starting point for a Flutter application.
+Current location detection.
+Start and Destination address marking on google map.
+Route Calcuator using Google Direction Api (Note: you have to enable billing to use it). To be implemented:
+Distance Calculator.
+The project was implemented using Flutter version 3.0.3 Android Configs:
 
-A few resources to get you started if this is your first Flutter project:
+flutter.minSdkVersion=20
+flutter.compileSdkVersion=33
+flutter.targetSdkVersion=31
+Library used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+google_maps_flutter: ^2.1.8
+geolocator: ^8.2.1
+permission_handler: ^10.0.0
+flutter_polyline_points: ^1.0.0
+geocoding: ^2.0.4
