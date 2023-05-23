@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/widgets/text_field.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -6,13 +7,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+
+const String googleApiKey = 'Enter your Google API Key here';
+
 class MapWidget extends StatefulWidget {
+  const MapWidget({super.key});
+
   @override
   State<StatefulWidget> createState() => _MapWidgetState();
 }
 
 class _MapWidgetState extends State<MapWidget> {
-  CameraPosition initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+  CameraPosition initialLocation = const CameraPosition(target: LatLng(0.0, 0.0));
   late List<Location> startPlacemark;
   late List<Location>
       destinationPlacemark; // = await locationFromAddress(_destinationAddress);
@@ -54,12 +60,12 @@ class _MapWidgetState extends State<MapWidget> {
     // drawing the polylines
     print("I AM POLY");
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      "AIzaSyB_-uOyQimLqBkDW_Vr8d88GX6Qk0lyksI", // Google Maps API Key
+      googleApiKey, // Google Maps API Key
       PointLatLng(startLatitude, startLongitude),
       PointLatLng(destinationLatitude, destinationLongitude),
       travelMode: TravelMode.transit,
     );
-
+   print(result.errorMessage);  //Enable Billing to access this API
     // Adding the coordinates to the list
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {
@@ -131,7 +137,7 @@ class _MapWidgetState extends State<MapWidget> {
         title: 'Destination $destinationCoordinatesString',
         snippet: _destinationAddress,
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
     );
 
     setState(() {
@@ -285,9 +291,9 @@ class _MapWidgetState extends State<MapWidget> {
                       textField(
                           label: 'Start',
                           hint: 'Choose starting point',
-                          prefixIcon: Icon(Icons.looks_one),
+                          prefixIcon: const Icon(Icons.looks_one),
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.my_location),
+                            icon: const Icon(Icons.my_location),
                             onPressed: () {
                               startAddressController.text = _currentAddress;
                               _startAddress = _currentAddress;
@@ -301,11 +307,11 @@ class _MapWidgetState extends State<MapWidget> {
                               _startAddress = value;
                             });
                           }),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       textField(
                           label: 'Destination',
                           hint: 'Choose destination',
-                          prefixIcon: Icon(Icons.looks_two),
+                          prefixIcon: const Icon(Icons.looks_two),
                           controller: destinationAddressController,
                           focusNode: desrinationAddressFocusNode,
                           width: width,
@@ -329,10 +335,12 @@ class _MapWidgetState extends State<MapWidget> {
 
                           );
                         } : (){
-                          print("Invalid Address");
+                          if (kDebugMode) {
+                            print("Invalid Address");
+                          }
                         },
 
-                        child: Text("Find route"),
+                        child: const Text("Find route"),
                       )
                     ],
                   ),
@@ -350,7 +358,7 @@ class _MapWidgetState extends State<MapWidget> {
                         color: Colors.blue.shade100, // button color
                         child: InkWell(
                           splashColor: Colors.blue, // inkwell color
-                          child: SizedBox(
+                          child: const SizedBox(
                             width: 50,
                             height: 50,
                             child: Icon(Icons.add),
@@ -363,13 +371,13 @@ class _MapWidgetState extends State<MapWidget> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ClipOval(
                       child: Material(
                         color: Colors.blue.shade100, // button color
                         child: InkWell(
                           splashColor: Colors.blue, // inkwell color
-                          child: SizedBox(
+                          child: const SizedBox(
                             width: 50,
                             height: 50,
                             child: Icon(Icons.remove),
@@ -396,7 +404,7 @@ class _MapWidgetState extends State<MapWidget> {
                       color: Colors.orange.shade100, // button color
                       child: InkWell(
                         splashColor: Colors.orange, // inkwell color
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 56,
                           height: 56,
                           child: Icon(Icons.my_location),
