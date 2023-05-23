@@ -19,14 +19,14 @@ Widget textField({
       },
       controller: controller,
       focusNode: focusNode,
-      decoration: new InputDecoration(
+      decoration:  InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         labelText: label,
         filled: true,
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
           borderSide: BorderSide(
@@ -35,7 +35,7 @@ Widget textField({
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(10.0),
           ),
           borderSide: BorderSide(
@@ -43,7 +43,7 @@ Widget textField({
             width: 2,
           ),
         ),
-        contentPadding: EdgeInsets.all(15),
+        contentPadding: const EdgeInsets.all(15),
         hintText: hint,
       ),
     ),
